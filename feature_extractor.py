@@ -55,7 +55,7 @@ class FeatureExtractor():
         X_df_new = X_df_new.assign(
             past_d2land_2=pd.Series(past_distance))
         #adding max, min of variables as well as their relative locations to the center of the storm
-        Xz=X_df.iloc[:,13:134];
+               Xz=X_df.iloc[:,13:134];
         maxz=np.max(Xz,axis=1)
         minz=np.min(Xz,axis=1)
         loc_maxz=np.argmax(Xz,axis=1)
@@ -64,6 +64,65 @@ class FeatureExtractor():
         lox_minz=np.argmin(Xz,axis=1)
         loc_minz_i=loc_minz//11
         loc_minz_j=loc_minz-(loc_maxz_i*11)-1     
+        X_df_new = X_df_new.assign(
+            maxz=pd.Series(maxz),minz=pd.Series(minz),loc_maxz_i=pd.Series(loc_maxz_i),loc_maxz_j=pd.Series(loc_maxz_j),
+            loc_minz_i=pd.Series(loc_minz_i),loc_minz_j=pd.Series(loc_minz_j))
+        
+        
+                
+        Xslp=X_df.iloc[:,X_df.columns.get_loc("slp_0_0")+1:X_df.columns.get_loc("slp_10_10")+1];
+        maxslp=np.max(Xslp,axis=1)
+        minslp=np.min(Xslp,axis=1)
+        loc_maxslp=np.argmax(Xslp,axis=1)
+        loc_maxslp_i=loc_maxslp//11
+        loc_maxslp_j=loc_maxslp-(loc_maxslp_i*11)-1
+        lox_minslp=np.argmin(Xslp,axis=1)
+        loc_minslp_i=loc_minslp//11
+        loc_minslp_j=loc_minslp-(loc_maxslp_i*11)-1   
+        X_df_new = X_df_new.assign(
+                maxslp=pd.Series(maxslp),minslp=pd.Series(minslp),loc_maxslp_i=pd.Series(loc_maxslp_i),loc_maxslp_j=pd.Series(loc_maxslp_j),
+                loc_minslp_i=pd.Series(loc_minslp_i),loc_minslp_j=pd.Series(loc_minslp_j))
+        
+        Xhum=X_df.iloc[:,X_df.columns.get_loc("hum_0_0")+1:X_df.columns.get_loc("hum_10_10")+1];
+        maxhum=np.max(Xhum,axis=1)
+        minhum=np.min(Xhum,axis=1)
+        loc_maxhum=np.argmax(Xhum,axis=1)
+        loc_maxhum_i=loc_maxhum//11
+        loc_maxhum_j=loc_maxhum-(loc_maxhum_i*11)-1
+        lox_minhum=np.argmin(Xhum,axis=1)
+        loc_minhum_i=loc_minhum//11
+        loc_minhum_j=loc_minhum-(loc_maxhum_i*11)-1   
+        X_df_new = X_df_new.assign(
+                maxhum=pd.Series(maxhum),minhum=pd.Series(minhum),loc_maxhum_i=pd.Series(loc_maxhum_i),loc_maxhum_j=pd.Series(loc_maxhum_j),
+                loc_minhum_i=pd.Series(loc_minhum_i),loc_minhum_j=pd.Series(loc_minhum_j))        
+        
+        
+        Xsst=X_df.iloc[:,X_df.columns.get_loc("sst_0_0")+1:X_df.columns.get_loc("sst_10_10")+1];
+        maxsst=np.max(Xsst,axis=1)
+        minsst=np.min(Xsst,axis=1)
+        loc_maxsst=np.argmax(Xsst,axis=1)
+        loc_maxsst_i=loc_maxsst//11
+        loc_maxsst_j=loc_maxsst-(loc_maxsst_i*11)-1
+        lox_minsst=np.argmin(Xsst,axis=1)
+        loc_minsst_i=loc_minsst//11
+        loc_minsst_j=loc_minsst-(loc_maxsst_i*11)-1 
+        X_df_new = X_df_new.assign(
+                maxsst=pd.Series(maxsst),minsst=pd.Series(minsst),loc_maxsst_i=pd.Series(loc_maxsst_i),loc_maxsst_j=pd.Series(loc_maxsst_j),
+                loc_minsst_i=pd.Series(loc_minsst_i),loc_minsst_j=pd.Series(loc_minsst_j))
+        
+        Xvo700=X_df.iloc[:,X_df.columns.get_loc("vo700_0_0")+1:X_df.columns.get_loc("vo700_10_10")+1];
+        maxvo700=np.max(Xvo700,axis=1)
+        minvo700=np.min(Xvo700,axis=1)
+        loc_maxvo700=np.argmax(Xvo700,axis=1)
+        loc_maxvo700_i=loc_maxvo700//11
+        loc_maxvo700_j=loc_maxvo700-(loc_maxvo700_i*11)-1
+        lox_minvo700=np.argmin(Xvo700,axis=1)
+        loc_minvo700_i=loc_minvo700//11
+        loc_minvo700_j=loc_minvo700-(loc_maxvo700_i*11)-1   
+        X_df_new = X_df_new.assign(
+                maxvo700=pd.Series(maxvo700),minvo700=pd.Series(minvo700),loc_maxvo700_i=pd.Series(loc_maxvo700_i),loc_maxvo700_j=pd.Series(loc_maxvo700_j),
+                loc_minvo700_i=pd.Series(loc_minvo700_i),loc_minvo700_j=pd.Series(loc_minvo700_j))
+        
         
         
         
