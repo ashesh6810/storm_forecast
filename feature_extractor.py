@@ -54,6 +54,17 @@ class FeatureExtractor():
             past_windspeed_2=pd.Series(past_winds))
         X_df_new = X_df_new.assign(
             past_d2land_2=pd.Series(past_distance))
+        #adding max, min of variables as well as their relative locations to the center of the storm
+        Xz=X_df.iloc[:,13:134];
+        maxz=np.max(Xz,axis=1)
+        minz=np.min(Xz,axis=1)
+        loc_maxz=np.argmax(Xz,axis=1)
+        loc_maxz_i=loc_maxz//11
+        loc_maxz_j=loc_maxz-(loc_maxz_i*11)-1
+        lox_minz=np.argmin(Xz,axis=1)
+        loc_minz_i=loc_minz//11
+        loc_minz_j=loc_minz-(loc_maxz_i*11)-1     
+        
         
         
         XX = X_df_new.values
